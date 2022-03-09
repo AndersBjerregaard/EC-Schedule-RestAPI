@@ -1,6 +1,5 @@
 ﻿using EC_Schedule_RESTAPI.Data;
 using EC_Schedule_RESTAPI.Domain;
-using EC_Schedule_RESTAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +17,13 @@ namespace EC_Schedule_RESTAPI.Controllers
         public HomeController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        [HttpGet("")]
+        public IActionResult HomeTest()
+        {
+            ControllerContext.HttpContext.Request.IsHttps;
+            return Ok(new { message = "This is a test endpoint, to validate connection" });
         }
 
         [HttpGet("Test")]
