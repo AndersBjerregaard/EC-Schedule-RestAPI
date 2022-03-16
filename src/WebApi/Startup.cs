@@ -1,14 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
+using WebApi.Domain;
 using WebApi.Middleware;
+using WebApi.Services;
+using WebApi.Services.Interfaces;
 
 namespace WebApi
 {
@@ -25,6 +32,11 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(GetConnectionStringFromConfig()));
+
+            // The service that controllers should use to contact the mysql database.
+            services.AddScoped<IDbService<UserDomainClass>, EFDbService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,10 +69,17 @@ namespace WebApi
 
             app.UseUnlistenHttpMiddleware();
 
+            // Mapping controllers individually from their own routings in their corresponding classes.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private string GetConnectionStringFromConfig()
+        {
+            using StreamReader reader = new StreamReader(@"config.txt");
+                return reader.ReadLine().Split(':')[1];
         }
     }
 }
