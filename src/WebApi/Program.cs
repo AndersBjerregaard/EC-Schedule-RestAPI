@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EC_Schedule_RESTAPI
+namespace WebApi
 {
     public class Program
     {
