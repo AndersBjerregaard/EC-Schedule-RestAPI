@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Middleware;
 
 namespace WebApi
 {
@@ -38,17 +39,23 @@ namespace WebApi
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // MVC middleware
+
             app.UseRouting();
 
             // API clients may not understand or obey redirects from HTTP to HTTPS. Such clients may send information over HTTP. Web APIs should either:
             // Not listen on HTTP.
             // Close the connection with status code 400(Bad Request) and not serve the request.
-            // app.UseHttpsRedirection(); 
+            // app.UseHttpsRedirection();
 
             // The default API projects don't include HSTS because HSTS is generally a browser only instruction. Other callers, such as phone or desktop apps, do not obey the instruction. Even within browsers, a single authenticated call to an API over HTTP has risks on insecure networks. The secure approach is to configure API projects to only listen to and respond over HTTPS.
             // app.UseHsts();
 
             app.UseAuthorization();
+
+            // Custom middleware
+
+            app.UseUnlistenHttpMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

@@ -17,5 +17,11 @@ namespace WebApi.Controllers
         {
             return Ok(new { message = "Hello World!" });
         }
+
+        [HttpGet("InvalidProtocol")]
+        public IActionResult InvalidProtocol()
+        {
+            return BadRequest("This API does not listen on HTTP. Please use HTTPS exclusively");
+        }
     }
 }
