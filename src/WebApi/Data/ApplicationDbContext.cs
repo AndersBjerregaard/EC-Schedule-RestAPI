@@ -11,8 +11,6 @@ namespace WebApi.Data
 
         }
 
-        public DbSet<DomainTestObject> TestObjects { get; set; }
-
         public DbSet<UserDomainClass> Users { get; set; }
     }
 }

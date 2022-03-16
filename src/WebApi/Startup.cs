@@ -35,8 +35,7 @@ namespace WebApi
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(GetConnectionStringFromConfig()));
 
-            // The service that controllers should use to contact the mysql database.
-            services.AddScoped<IDbService<UserDomainClass>, EFDbService>();
+            services.AddScoped<IAuthorizationService, DefaultAuthorizationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

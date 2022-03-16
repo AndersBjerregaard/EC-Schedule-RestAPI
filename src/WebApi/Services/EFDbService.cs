@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 using WebApi.Data;
 using WebApi.Domain;
@@ -15,7 +16,12 @@ namespace WebApi.Services
             _dbContext = dbContext;
         }
 
-        public async Task<UserDomainClass[]> GetAll()
+        public async Task<UserDomainClass> FindAsync(params object[] keyValues)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<UserDomainClass[]> GetAllAsync()
         {
             return await _dbContext.Users.ToArrayAsync();
         }

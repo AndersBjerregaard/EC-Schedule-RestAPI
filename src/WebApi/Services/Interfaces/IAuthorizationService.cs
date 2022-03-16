@@ -9,6 +9,8 @@ namespace WebApi.Services.Interfaces
 {
     public interface IAuthorizationService
     {
-        Task<AuthenticationResult> Login(AuthenticationRequest request);
+        Task<AuthenticationResult> LoginAsync(AuthenticationRequest request);
+
+        Task<AuthenticationResult> RegisterAsync(AuthenticationRequest request);
     }
 }

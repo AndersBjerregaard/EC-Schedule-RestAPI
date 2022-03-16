@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Domain;
 
 namespace WebApi.Services.Interfaces
 {
-    public interface IDbService<T> where T : class
+    public interface IUserDbService : IDbService<UserDomainClass>
     {
-        Task<T[]> GetAllAsync();
-
-        Task<T> FindAsync(params object[] keyValues);
+        
     }
 }

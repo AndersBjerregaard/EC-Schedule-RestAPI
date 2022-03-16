@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApi.Domain
 {
-    public class UserDomainClass
+    public class UserDomainClass : UserBaseClass
     {
-        [Key]
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
     }
 }

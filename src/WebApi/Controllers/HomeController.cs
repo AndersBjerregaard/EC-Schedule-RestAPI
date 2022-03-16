@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        private readonly IDbService<UserDomainClass> _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public HomeController(IDbService<UserDomainClass> dbContext)
+        public HomeController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -31,7 +31,7 @@ namespace WebApi.Controllers
         [HttpGet("Home")]
         public async Task<IActionResult> Home()
         {
-            return Ok(await _dbContext.GetAll());
+            return Ok(await _dbContext.Users.ToArrayAsync());
         }
 
         [HttpGet("InvalidProtocol")]
