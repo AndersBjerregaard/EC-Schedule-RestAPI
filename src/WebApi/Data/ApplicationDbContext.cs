@@ -12,5 +12,7 @@ namespace WebApi.Data
         }
 
         public DbSet<UserDomainClass> Users { get; set; }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

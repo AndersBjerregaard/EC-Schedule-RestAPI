@@ -28,7 +28,7 @@ namespace WebApi.Controllers
             return Ok(new { message = "Hello World!" });
         }
 
-        [HttpGet("Home")]
+        [HttpGet("Users/Get")]
         public async Task<IActionResult> Home()
         {
             return Ok(await _dbContext.Users.ToArrayAsync());
